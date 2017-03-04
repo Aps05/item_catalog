@@ -23,9 +23,10 @@ from functools import wraps
 app = Flask(__name__)
 app.secret_key = 'super_secret_key' # Change for production
 ROOT = os.path.dirname(os.path.abspath(__file__))
+CLIENT_SECRETS = ROOT + '/client_secrets.json'
 
 CLIENT_ID = json.loads(
-    open(ROOT + '/client_secrets.json', 'r').read())['web']['client_id']
+    open(CLIENT_SECRETS, 'r').read())['web']['client_id']
 APPLICATION_NAME = "Restaurant Menu Application"
 
 
@@ -68,7 +69,7 @@ def gconnect():
 
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets(ROOT + '/client_secrets.json', scope='')
+        oauth_flow = flow_from_clientsecrets(CLIENT_SECRETS, scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
