@@ -21,6 +21,7 @@ import requests
 from functools import wraps
 
 app = Flask(__name__)
+app.secret_key = 'super_secret_key' # Change for production
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 CLIENT_ID = json.loads(
@@ -423,7 +424,6 @@ def disconnect():
         return redirect(url_for('showRestaurants'))
 
 
-app.secret_key = 'super_secret_key'
 if __name__ == '__main__':
     app.config['SESSION_TYPE'] = 'filesystem'
     
