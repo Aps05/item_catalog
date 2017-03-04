@@ -20,9 +20,10 @@ import requests
 from functools import wraps
 
 app = Flask(__name__)
+ROOT = os.path.dirname(os.path.abspath(__file__))
 
 CLIENT_ID = json.loads(
-    open('client_secrets.json', 'r').read())['web']['client_id']
+    open(ROOT + '/client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Restaurant Menu Application"
 
 
